@@ -1,35 +1,18 @@
-U: Y R R
-
-W W G
-
-O O G
-
-D: R B B
-
-R Y O
-
-G G W
-
-F: W B O
-
-W B O
-
-G Y Y
-
-B: W W R
-
-G G R
-
-B O Y
-
-L: W R B
-
-W R B
-
-O Y Y
-
-R: B G G
-
-B O Y
-
-R Y O
+U: W W W
+W W W
+W W W
+D: Y Y Y
+Y Y Y
+Y Y Y
+F: B B B
+B B B
+B B B
+B: G G G
+G G G
+G G G
+L: R R R
+R R R
+R R R
+R: O O O
+O O O
+O O O

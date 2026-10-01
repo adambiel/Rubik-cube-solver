@@ -1,25 +1,24 @@
-# Bibliografia
+# References
 
-## Wsparcie narzędzi AI
+## AI Assistance
 
-Podczas tworzenia programów korzystano z pomocy dużych modeli językowych (LLM):
+Large Language Models (LLMs) were used to assist in the development of the programs:
 - **Gemini**
 - **ChatGPT**
 
-## Dokumentacja i zasoby techniczne
+## Documentation and Technical Resources
 
 - [Doxygen – Documenting the code](https://www.doxygen.nl/manual/docblocks.html)
-- [Strona główna Doxygen](https://www.doxygen.nl)
+- [Doxygen Homepage](https://www.doxygen.nl)
 
-## Algorytmy i teoria kostki Rubika
+## Algorithms and Rubik's Cube Theory
 
 - [Herbert Kociemba – Two-Phase Algorithm](https://kociemba.org/)
 
-## Interfejsy graficzne i narzędzia
+## Graphical Interfaces and Tools
 
 - [Real Python – Python GUI With Tkinter](https://realpython.com/python-gui-tkinter/)
 
-## Symulatory i wizualizacje
+## Simulators and Visualizations
 
 - [Rubik's Cube Online Simulator](https://rubikscu.be/play/)
-

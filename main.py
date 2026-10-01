@@ -1,7 +1,7 @@
 # @file main.py
-# @brief Główny skrypt orkiestrujący działanie aplikacji.
-# @details Odpowiada za wybór trybu wprowadzania danych (CLI/GUI),
-#          uruchomienie solvera C++ oraz wizualizację wyników.
+# @brief Main script orchestrating the application's operation.
+# @details Responsible for selecting the data input mode (CLI/GUI),
+#          running the C++ solver, and visualizing the results.
 
 import argparse
 import sys
@@ -11,102 +11,102 @@ from pathlib import Path
 import shutil
 import tkinter as tk
 
-# Ustawienie ścieżki bazowej (katalog projektu)
+# Set the base path (project directory)
 BASE_DIR = Path(__file__).resolve().parent
 
-# Dodanie src_py do sys.path, aby importy działały
+# Add src_py to sys.path so imports work
 sys.path.append(str(BASE_DIR / "src_py"))
 
 try:
     from cli_handler import SolverCLI, DATA_DIR, INPUT_FILE, OUTPUT_FILE
     import input_gui
 except ImportError as e:
-    print(f"Błąd krytyczny: Nie można zaimportować modułów z src_py. {e}")
+    print(f"Critical error: Cannot import modules from src_py. {e}")
     sys.exit(1)
 
 CPP_EXEC = BASE_DIR / "src_cpp" / "main"
 GUI_SCRIPT = BASE_DIR / "src_py" / "vis_gui.py"
 
 ##
-# @brief Uruchamia solver napisany w C++.
-# @details Wywołuje plik wykonywalny przekazując stan kostki przez stdin i zapisując wynik do stdout.
-#          Ustawia katalog roboczy na src_cpp, aby solver poprawnie znalazł heurystyki w ../data.
-# @return True jeśli solver zakończył się sukcesem, False w przeciwnym razie.
+# @brief Runs the solver written in C++.
+# @details Calls the executable, passing the cube state via stdin and saving the result to stdout.
+#          Sets the working directory to src_cpp so the solver correctly finds heuristics in ../data.
+# @return True if the solver completed successfully, False otherwise.
 def run_cpp_solver():
     """Runs the C++ solver executable."""
-    # Sprawdzenie pliku wykonywalnego
+    # Check the executable file
     if not CPP_EXEC.exists():
-        print(f"Błąd: Nie znaleziono pliku wykonywalnego C++ w {CPP_EXEC}")
-        print("Proszę uruchomić skrypt konfiguracyjny w głównym katalogu:")
+        print(f"Error: C++ executable not found at {CPP_EXEC}")
+        print("Please run the setup script in the main directory:")
         print("  ./setup.sh")
         return False
 
-    # Sprawdzenie heurystyk
+    # Check heuristics
     heuristics = ["eph.txt", "eoh.txt", "cph.txt"]
     missing_heuristics = [h for h in heuristics if not (DATA_DIR / h).exists()]
     
     if missing_heuristics:
-        print(f"Błąd: Brakuje plików heurystyk: {', '.join(missing_heuristics)}")
-        print("Proszę uruchomić skrypt konfiguracyjny, aby je wygenerować:")
+        print(f"Error: Missing heuristic files: {', '.join(missing_heuristics)}")
+        print("Please run the setup script to generate them:")
         print("  ./setup.sh")
         return False
     
     if not INPUT_FILE.exists():
-        print(f"Błąd: Nie znaleziono pliku ze stanem kostki {INPUT_FILE}")
+        print(f"Error: Cube state file not found at {INPUT_FILE}")
         return False
         
-    print(f"\nUruchamianie solvera: {CPP_EXEC} < {INPUT_FILE} > {OUTPUT_FILE}")
+    print(f"\nRunning solver: {CPP_EXEC} < {INPUT_FILE} > {OUTPUT_FILE}")
     try:
-        # Kod w C++ oczekuje uruchomienia z katalogu src_cpp, aby ścieżki ../data/ działały
-        # Przekazujemy cube_state.txt jako stdin, solution_steps.txt jako stdout
+        # The C++ code expects to be run from the src_cpp directory so ../data/ paths work
+        # Pass cube_state.txt as stdin, solution_steps.txt as stdout
         with open(INPUT_FILE, 'r') as stdin_f, open(OUTPUT_FILE, 'w') as stdout_f:
             subprocess.run(
                 [str(CPP_EXEC)], 
-                cwd=CPP_EXEC.parent, # Ustawiamy CWD na src_cpp
+                cwd=CPP_EXEC.parent, # Set CWD to src_cpp
                 stdin=stdin_f, 
                 stdout=stdout_f, 
                 check=True
             )
         return True
     except subprocess.CalledProcessError as e:
-        print(f"Solver zakończył działanie z kodem błędu {e.returncode}")
+        print(f"Solver terminated with error code {e.returncode}")
         return False
     except OSError as e:
-        print(f"Wykonanie nie powiodło się: {e}")
+        print(f"Execution failed: {e}")
         return False
 
 ##
-# @brief Uruchamia wizualizację rozwiązania.
-# @details Kopiuje wynik solvera do pliku test.txt (wymagane przez vis_gui.py)
-#          i uruchamia skrypt wizualizacji.
+# @brief Runs the solution visualization.
+# @details Copies the solver's result to the test.txt file (required by vis_gui.py)
+#          and runs the visualization script.
 def run_gui():
     """Runs the visualization GUI."""
-    print(f"\nUruchamianie wizualizacji...")
+    print(f"\nRunning visualization...")
     if not GUI_SCRIPT.exists():
-        print(f"Błąd: Nie znaleziono skryptu GUI w {GUI_SCRIPT}")
+        print(f"Error: GUI script not found at {GUI_SCRIPT}")
         return
 
     try:
-        # Workaround dla vis_gui.py, który szuka 'test.txt' w CWD (teraz root)
+        # Workaround for vis_gui.py, which looks for 'test.txt' in CWD (now root)
         if OUTPUT_FILE.exists():
             shutil.copy(str(OUTPUT_FILE), "test.txt")
         else:
-            print(f"Ostrzeżenie: Nie znaleziono pliku z rozwiązaniem {OUTPUT_FILE}. Wizualizacja może się nie udać.")
+            print(f"Warning: Solution file {OUTPUT_FILE} not found. Visualization may fail.")
     except Exception as e:
-        print(f"Nie udało się skopiować rozwiązania do test.txt: {e}")
+        print(f"Failed to copy solution to test.txt: {e}")
 
     try:
-        # Upewniamy się, że PYTHONPATH zawiera src_py dla subprocessa
+        # Ensure PYTHONPATH contains src_py for the subprocess
         env = os.environ.copy()
         env["PYTHONPATH"] = str(BASE_DIR / "src_py") + ":" + env.get("PYTHONPATH", "")
         subprocess.run([sys.executable, str(GUI_SCRIPT)], check=True, env=env)
     except Exception as e:
-        print(f"Nie udało się uruchomić GUI: {e}")
+        print(f"Failed to run GUI: {e}")
 
 ##
-# @brief Główna funkcja programu.
-# @details Parsuje argumenty wiersza poleceń, steruje przepływem danych
-#          między modułami inputu, solvera i wizualizacji.
+# @brief Main function of the program.
+# @details Parses command line arguments, controls data flow
+#          between input, solver, and visualization modules.
 def main():
     parser = argparse.ArgumentParser(description="Rubik's Cube Solver Orchestrator")
     parser.add_argument('--terminal', "-t", action='store_true', help="Use terminal input mode")
@@ -117,13 +117,13 @@ def main():
     
     if args.terminal:
         cli = SolverCLI()
-        print("Uruchamianie trybu terminalowego...")
+        print("Running terminal mode...")
         # cli.run() executes the input loop and saves to file
         cli.run()
         if INPUT_FILE.exists():
             cube_state_ready = True
     else:
-        print("Uruchamianie trybu graficznego (GUI)...")
+        print("Running graphical mode (GUI)...")
         try:
             root = tk.Tk()
             root.minsize(600, 500)
@@ -133,23 +133,23 @@ def main():
             gui_output = Path.cwd() / "cube_input.txt"
             
             if gui_output.exists():
-                print(f"GUI zamknięte. Przenoszenie {gui_output} do {INPUT_FILE}...")
+                print(f"GUI closed. Moving {gui_output} to {INPUT_FILE}...")
                 DATA_DIR.mkdir(exist_ok=True)
                 shutil.move(str(gui_output), str(INPUT_FILE))
                 cube_state_ready = True
             else:
-                print("GUI zamknięte, ale nie znaleziono pliku wyjściowego (może anulowano?).")
+                print("GUI closed, but output file not found (maybe canceled?).")
                 
         except Exception as e:
-            print(f"Błąd uruchamiania GUI: {e}")
-            print("Zalecane użycie trybu --terminal.")
+            print(f"Error running GUI: {e}")
+            print("Recommended to use --terminal mode.")
         
     if cube_state_ready:
         if run_cpp_solver():
-            print("Rozwiązanie wygenerowane.")
+            print("Solution generated.")
             run_gui()
         else:
-            print("Pomijanie wizualizacji z powodu błędu solvera.")
+            print("Skipping visualization due to solver error.")
 
 if __name__ == "__main__":
     main()

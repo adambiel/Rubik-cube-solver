@@ -13,7 +13,7 @@ int main()
     
     vector<string> moves = {"R", "U", "F", "L", "B", "D"};
     
-    cout << "Generowanie stanu po ruchach: ";
+    cout << "Generating cube state after each move: ";
     for(const auto& m : moves) {
         cout << m << " ";
         c.move(m);

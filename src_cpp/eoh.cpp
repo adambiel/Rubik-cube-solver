@@ -2,11 +2,11 @@
 #include "eoh.h"
 eoh::eoh()
 {
-	cerr<<"Rozpoczecie wczytywania eoh.txt"<<endl;
+	cerr<<"Starting to load eoh.txt"<<endl;
 	ifstream data("../data/eoh.txt");
 	if(!data)
 	{
-		cerr<<"Dane heurystyki eoh nie zostały wygenerowane!\n";
+		cerr<<"eoh data not generated!\n";
 		return;
 	}
 	for(int i=0;i<4096;i++) data>>_eoh[i];

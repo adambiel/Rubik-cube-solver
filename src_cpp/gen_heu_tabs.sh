@@ -1,24 +1,12 @@
 #!/bin/bash
-echo Rozpoczęcie kompilacji: 
-g++ -Iinclude -O3 cube.cpp -c 
-g++ -Iinclude -O3 lehmer_code.cpp -c 
-g++ -Iinclude -O3 eph_gen.cpp -c
-g++ -Iinclude -O3 eoh_gen.cpp -c
-g++ -Iinclude -O3 cph_gen.cpp -c
 
-echo Zakończenie kompilacji i rozpoczęcie linkowania:
-g++ -O3 cube.o lehmer_code.o eph_gen.o -o eph_gen
-g++ -O3 cube.o lehmer_code.o eoh_gen.o -o eoh_gen
-g++ -O3 cube.o lehmer_code.o cph_gen.o -o cph_gen
-echo Zakończenie linkowania
-
-echo Rozpoczęcie generowania tablicy eph:
+echo Starting to generate eph data:
 ./eph_gen >../data/eph.txt
 
-echo Rozpoczęcie generowania tablicy eoh:
+echo Starting to generate eoh data:
 ./eoh_gen >../data/eoh.txt
 
-echo Rozpoczęcie generowania tablicy cph:
+echo Starting to generate cph data:
 ./cph_gen >../data/cph.txt
 
 #rm *.o

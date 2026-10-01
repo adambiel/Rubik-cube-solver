@@ -1,103 +1,102 @@
-# Projekt z PWI zespół 4
-Tematem projektu jest program układający kostkę Rubika.
+# Rubik's Cube Solver – PWI Project (Team 4)
 
-# Instrukcja Obsługi
+This project features a program designed to solve a Rubik's Cube. 
 
-## 1. Wymagania wstępne
-- System Linux
-- Python 3.x z bibliotekami: `tkinter`, `matplotlib`, `argparse`
-- Kompilator G++
-- Doxygen (opcjonalnie, do dokumentacji)
+## 1. Prerequisites
+- **OS:** Linux
+- **Python:** 3.x with the following libraries: `tkinter`, `matplotlib`, `argparse`
+- **Compiler:** G++ (for C++ code)
+- **Documentation (Optional):** Doxygen
 
-## 2. Instalacja i Kompilacja (Setup)
-Po pobraniu repozytorium należy uruchomić skrypt konfiguracyjny, który skompiluje solver C++ oraz wygeneruje niezbędne tablice heurystyk (może to potrwać kilka minut).
+## 2. Setup and Compilation
+After cloning the repository, run the configuration script. This will compile the C++ solver and generate the necessary heuristic tables (this process may take a few minutes).
 
 ```bash
 ./setup.sh
 ```
 
-## 3. Uruchamianie Programu
-Głównym punktem wejścia jest skrypt `main.py` w głównym katalogu.
+## 3. Running the Application
+The main entry point for the application is the `main.py` script located in the root directory.
 
-### Tryb Terminalowy (CLI)
-Najszybszy sposób na przetestowanie. Wymaga ręcznego wpisania kolorów ścianek.
+### Command-Line Interface (CLI) Mode
+The fastest way to test the solver. This mode requires manual input of the cube's face colors.
 ```bash
 python3 main.py --terminal
 ```
-Program poprosi o wpisanie stanu 6 ścianek (U, D, F, B, L, R). Format wejściowy: ciąg 9 znaków (np. `WWWWWWWWW`) dla każdej ściany.
-Dozwolone kolory: `W` (Biały), `Y` (Żółty), `B` (Niebieski), `G` (Zielony), `R` (Czerwony), `O` (Pomarańczowy).
+The program will prompt you to enter the state of all 6 faces (U, D, F, B, L, R). 
+- **Input format:** A sequence of 9 characters (e.g., `WWWWWWWWW`) for each face.
+- **Allowed colors:** `W` (White), `Y` (Yellow), `B` (Blue), `G` (Green), `R` (Red), `O` (Orange).
 
-### Tryb Graficzny (GUI)
-Uruchamia okno z siatką do "wyklikania" kolorów.
+### Graphical User Interface (GUI) Mode
+Launches an interactive window with a grid where you can click to select and set colors.
 ```bash
 python3 main.py
 ```
 
-## 4. Generowanie Testów
-W katalogu `src_cpp` znajduje się narzędzie do generowania trudniejszych, poprawnych stanów kostki.
-(Wcześniej należy skąpilować cały projekt)
+## 4. Test Generation
+The `src_cpp` directory contains a tool for generating valid, scrambled cube states for testing purposes. 
+*(Note: Ensure the main project has been compiled prior to running this).*
 
-Kompilacja i uruchomienie generatora:
+To compile and run the generator:
 ```bash
 g++ -Isrc_cpp/include src_cpp/gen_test_case.cpp src_cpp/cube.o -o gen_test_case
 ./gen_test_case
 ```
 
-## 5. Dokumentacja
-Dokumentacja techniczna kodu jest generowana przez Doxygen.
+## 5. Documentation
+Technical code documentation is generated using Doxygen.
 ```bash
 doxygen Doxyfile
 cd documentation/latex && make
 ```
-Plik wynikowy PDF: `documentation/latex/refman.pdf`
+The resulting PDF file will be available at: `documentation/latex/refman.pdf`
 
-## 6. Notacja Ruchów
-Szczegółowy opis notacji (co oznaczają symbole `F`, `R'`, `U2` itd.) znajduje się w pliku:
-[RUCHY.md](RUCHY.md)
+## 6. Move Notation
+A detailed description of the move notation used in this project (e.g., what `F`, `R'`, `U2` mean) can be found in the following file: 
+[MOVES.md](MOVES.md)
 
 ---
 
-# Ramowy plan projektu:
-1) Wczytanie danych (Python):
-Użytkownik wprowadza stan początkowy kostki na interaktywnej planszy. Program sprawdza poprawność danych (m.in. zgodność liczby pól w danym kolorze). Po zatwierdzeniu generowany jest plik wejściowy .txt zawierający cyfrową reprezentację układu ścianek.
+## Project Workflow
 
-2) Warstwa algorytmiczna (C++): Program wczytuje wygenerowany plik, przetwarza dane i uruchamia algorytm rozwiązujący. Sekwencja ruchów zapisywana jest do osobnego pliku wynikowego .txt.
+1. **Input Layer (Python):** 
+   The user inputs the initial state of the cube via an interactive grid or the terminal. The program validates the input (e.g., checking if the exact number of required colored tiles is present). Once validated, it generates a `.txt` input file containing the digital representation of the cube's state.
 
-3) Wizualizacja rozwiązania (Python): Program odczytuje listę ruchów z pliku i prezentuje użytkownikowi instrukcję ułożenia kostki. 
+2. **Algorithmic Core (C++):** 
+   The C++ solver reads the generated file, processes the data, and executes the IDA* solving algorithm. The computed sequence of moves is then saved to a separate `.txt` output file.
 
-Oraz przy 1) i 3) aspoekcie: możliwość wypisywania (i wczytywania) na standardowe wyjście
+3. **Visualization & Output (Python):** 
+   The program reads the list of moves from the output file and presents step-by-step instructions for solving the cube. Both the input and output processes support standard input/output (stdin/stdout) redirection.
 
+## Team Information
+**Members [Python & C++]:** 359949, 359409, 351683, 361008, 360678, 331060
 
-# Dane zespołu
-Zespół 4, opiekun Piotr Ostropolski-Nalewaja, skład: 
-359949 359409 351683 361008 360678 331060 [Python i C++]
-
-### Struktura repozytorium
+## Repository Structure
 ```text
 /Projekt-PWI-zesp-4
 │
-├── main.py                 # Główny skrypt orkiestrujący (uruchamia CLI/GUI i Solver)
-├── setup.sh                # Skrypt instalacyjny (kompilacja C++ i generowanie heurystyk)
-├── README.md               # Dokumentacja projektu
-├── Doxyfile                # Konfiguracja Doxygen
-├── Refman.pdf              # Dokumentacja  
+├── main.py                 # Main orchestrator script (launches CLI/GUI and Solver)
+├── setup.sh                # Installation script (C++ compilation and heuristics generation)
+├── README.md               # Project documentation
+├── Doxyfile                # Doxygen configuration
+├── Refman.pdf              # Generated documentation  
 │
-├── /data                   # Folder wymiany danych (pliki tymczasowe)
-│   ├── cube_state.txt      # Stan kostki (Wejście dla C++)
-│   ├── solution_steps.txt  # Kroki rozwiązania (Wyjście z C++)
-│   └── *.txt               # Wygenerowane tablice heurystyk
+├── /data                   # Data exchange folder (temporary files)
+│   ├── cube_state.txt      # Cube state (Input for C++)
+│   ├── solution_steps.txt  # Solution steps (Output from C++)
+│   └── *.txt               # Generated heuristic tables
 │
-├── /src_cpp                # Kod źródłowy C++ (Solver IDA*)
-│   ├── main.cpp            # (C1) Ładuje dane, uruchamia solver
-│   ├── cube.cpp / .h       # (C1) Logika kostki i ruchów
-│   ├── ida_star.cpp / .h   # (C2) Algorytm IDA*
-│   ├── gen_test_case.cpp   # Generator testowych stanów kostki
-│   └── pliki .sh           # Skrypty kompilacji (wywoływane przez setup.sh)
+├── /src_cpp                # C++ Source Code (IDA* Solver)
+│   ├── main.cpp            # Loads data, runs the solver
+│   ├── cube.cpp / .h       # Cube logic and move mechanics
+│   ├── ida_star.cpp / .h   # IDA* Algorithm implementation
+│   ├── gen_test_case.cpp   # Generator for test cube states
+│   └── *.sh files          # Compilation scripts (called by setup.sh)
 │
-├── /src_py                 # Kod źródłowy Python (GUI/CLI)
-│   ├── input_gui.py        # (P1) Okno wprowadzania danych
-│   ├── vis_gui.py          # (P2) Wizualizacja 3D (Matplotlib)
-│   └── cli_handler.py      # (P3) Obsługa terminala
+├── /src_py                 # Python Source Code (GUI/CLI)
+│   ├── input_gui.py        # Data input window
+│   ├── vis_gui.py          # 3D Visualization (Matplotlib)
+│   └── cli_handler.py      # Terminal handler
 │
-└── /documentation          # Dokumentacja wygenerowana przez Doxygen
+└── /documentation          # Documentation generated by Doxygen
 ```
