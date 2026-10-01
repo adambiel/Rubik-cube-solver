@@ -42,8 +42,15 @@ To compile and run the generator:
 g++ -Isrc_cpp/include src_cpp/gen_test_case.cpp src_cpp/cube.o -o gen_test_case
 ./gen_test_case
 ```
+## 5. Automated Testing
 
-## 5. Documentation
+After running the `setup.sh` script, you can automatically test the solver's performance on random (but valid) cube states using the following command:
+
+```bash
+./src_cpp/main --test
+```
+
+## 6. Documentation
 Technical code documentation is generated using Doxygen.
 ```bash
 doxygen Doxyfile
@@ -51,7 +58,7 @@ cd documentation/latex && make
 ```
 The resulting PDF file will be available at: `documentation/latex/refman.pdf`
 
-## 6. Move Notation
+## 7. Move Notation
 A detailed description of the move notation used in this project (e.g., what `F`, `R'`, `U2` mean) can be found in the following file: 
 [MOVES.md](MOVES.md)
 
