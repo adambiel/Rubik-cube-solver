@@ -2,6 +2,15 @@
 
 This project features a program designed to solve a Rubik's Cube. 
 
+## My Contribution
+As a contributor to this team project, my primary focus was on the backend algorithmic engine, state representation, and cross-module debugging. My specific responsibilities included:
+* **Core Cube Mechanics :** Implemented the foundational `Cube` class, which handles internal state representation, strict move execution logic, and I/O operations for reading and saving cube states.
+* **Pattern Databases & Heuristics:** Developed the standalone programs responsible for generating the pattern databases required to efficiently guide the solving algorithm.
+* **Performance Optimization:** Integrated Lehmer coding for efficient permutation indexing, significantly optimizing heuristic lookup times and memory usage.
+* **Algorithmic Refinement:** Debugged and fine-tuned the core two-phase **IDA\*** search algorithm to ensure reliable and valid solution generation.
+* **Cross-Language Debugging:** Troubleshot and resolved synchronization and rendering issues within the Python-based 3D visualization module, ensuring accurate animated playback of the solution steps.
+
+---
 ## 1. Prerequisites
 - **OS:** Linux
 - **Python:** 3.x with the following libraries: `tkinter`, `matplotlib`, `argparse`
