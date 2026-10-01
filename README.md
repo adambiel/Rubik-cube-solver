@@ -73,7 +73,7 @@ A detailed description of the move notation used in this project (e.g., what `F`
 
 ## Repository Structure
 ```text
-/Projekt-PWI-zesp-4
+/Rubik-cube-solver
 │
 ├── main.py                 # Main orchestrator script (launches CLI/GUI and Solver)
 ├── setup.sh                # Installation script (C++ compilation and heuristics generation)
