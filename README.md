@@ -7,7 +7,7 @@ As a contributor to this team project, my primary focus was on the backend algor
 * **Core Cube Mechanics :** Implemented the foundational `cube` class, which handles internal state representation, strict move execution logic, and I/O operations for reading and saving cube states.
 * **Pattern Databases & Heuristics:** Developed the standalone programs responsible for generating the pattern databases required to efficiently guide the solving algorithm.
 * **Performance Optimization:** Integrated Lehmer coding for efficient permutation indexing, significantly optimizing heuristic lookup times and memory usage.
-* **C++ engine entry point: ** Designed the core C++ command-line controller (main.cpp), featuring distinct execution modes for standard IPC solving, interactive manual scrambling, and automated benchmarking with the state validation.
+* **C++ engine entry point:** Designed the core C++ command-line controller (main.cpp), featuring distinct execution modes for standard IPC solving, interactive manual scrambling, and automated benchmarking with the state validation.
 * **Algorithmic Refinement:** Debugged and fine-tuned the core two-phase **IDA\*** search algorithm to ensure reliable and valid solution generation.
 * **Cross-Language Debugging:** Troubleshot and resolved synchronization and rendering issues within the Python-based 3D visualization module, ensuring accurate animated playback of the solution steps.
 
