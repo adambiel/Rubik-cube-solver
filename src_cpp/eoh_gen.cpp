@@ -2,6 +2,9 @@
 #include "cube.h"
 int main()
 {
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+
 	cube solved;
 	queue<pair<cube, int> > q;
 	q.push(make_pair(solved, 0));

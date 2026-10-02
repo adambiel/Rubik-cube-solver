@@ -3,6 +3,9 @@
 #include "lehmer_code.h"
 int main()
 {
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+
 	cube state;
 
 	vector<string> moves = {"U", "Up", "U2", "Dp", "D2", "D", "R2", "L2", "F2", "B2"};
