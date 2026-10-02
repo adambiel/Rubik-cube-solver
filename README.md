@@ -112,8 +112,8 @@ A detailed description of the move notation used in this project (e.g., what `F`
 As a contributor to this team project, my primary focus was on the backend algorithmic engine, state representation, and cross-module debugging. My specific responsibilities included:
 * **Core Cube Mechanics:** Implemented the foundational `cube` class, which handles internal state representation, strict move execution logic, and I/O operations for reading and saving cube states.
 * **Pattern Databases & Heuristics:** Developed the standalone programs responsible for generating the pattern databases required to efficiently guide the solving algorithm.
-* **Performance Optimization:** Integrated Lehmer coding for efficient permutation indexing, significantly optimizing heuristic lookup times and memory usage.
-* **C++ Engine Entry Point:** Designed the core C++ command-line controller (`main.cpp`), featuring distinct execution modes for standard IPC solving, interactive manual scrambling, and automated benchmarking with the state validation.
-* **Algorithmic Refinement:** Debugged and fine-tuned the core two-phase **IDA\*** search algorithm to ensure reliable and valid solution generation.
+* **Performance Optimization:** Integrated Lehmer coding for efficient permutation indexing.
+* **C++ Engine Entry Point:** Designed the core C++ command-line controller (`main.cpp`), featuring distinct execution modes for standard IPC solving, interactive manual scrambling, and automated testing.
+* **Algorithmic Refinement:** Debugged the core two-phase **IDA\*** search algorithm.
 * **Cross-Language Debugging:** Troubleshot and resolved synchronization and rendering issues within the Python-based 3D visualization module, ensuring accurate animated playback of the solution steps.
 
