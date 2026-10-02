@@ -9,7 +9,9 @@ The solver uses a **two-phase IDA*** search algorithm guided by precomputed heur
 ---
 ## Demo
 
-![Rubik's Cube Solver Demo](docs/demo.gif)
+<p align="center">
+  <img src="docs/demo.gif" alt="Rubik's Cube Solver Demo" width="500">
+</p>
 
 ---
 ## 1. Prerequisites
