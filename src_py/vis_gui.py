@@ -102,8 +102,9 @@ def draw_cube(ax, state):
 moves = load_data("test.txt")
 
 # A single large view works much better in a GIF than four small views.
-fig = plt.figure(figsize=(7, 7), facecolor="#f7f7f7")
+fig = plt.figure(figsize=(7, 7), facecolor="#d0d0d0")
 ax = fig.add_subplot(111, projection="3d")
+ax.set_facecolor("#d0d0d0")
 fig.subplots_adjust(left=0, right=1, bottom=0, top=0.84)
 
 
