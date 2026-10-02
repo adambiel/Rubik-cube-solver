@@ -2,6 +2,9 @@
  *  @brief Implementation of the IDA* algorithm.
  *  @details Contains state space search logic to find a solution.
  */
+#include <cassert>
+#include<vector>
+#include<string>
 #include "cube.h"
 #include "debug.h"
 #include "eoh.h"

@@ -1,3 +1,6 @@
+#include <iostream>
+#include <queue>
+#include <vector>
 #include "debug.h"
 #include "cube.h"
 #include "lehmer_code.h"

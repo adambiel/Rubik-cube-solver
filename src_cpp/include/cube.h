@@ -1,5 +1,7 @@
 #pragma once
-#include<bits/stdc++.h>
+#include<string>
+#include<array>
+#include<cstdint>
 using namespace std;
 class cube
 {

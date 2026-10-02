@@ -1,3 +1,5 @@
+#include <fstream>
+#include <iostream>
 #include "cube.h"
 #include "eph.h"
 #include "lehmer_code.h"

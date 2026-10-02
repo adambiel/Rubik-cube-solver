@@ -6,6 +6,8 @@
 #include "cube.h"
 #include "ida_star.h"
 #include <chrono>
+#include <cstring>
+#include <cassert>
 
 int main(int argc, char* argv[])
 {

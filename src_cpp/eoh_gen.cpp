@@ -1,3 +1,7 @@
+#include <iostream>
+#include <queue>
+#include <vector>
+#include <map>
 #include "debug.h"
 #include "cube.h"
 int main()

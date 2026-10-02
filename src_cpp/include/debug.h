@@ -2,7 +2,7 @@
 // pozwalajacy wypisac na wyjscie diagnostyczne dowolna liczbe obiektow ponizej postaci:
 // zmienna / kontener iterowalny / para zlozona z dowolnej kombinacji dwoch powyzszych
 #pragma once
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 #ifdef DEBUG
 auto&operator <<(auto& o, pair<auto, auto> p) {return o<<"{"<<p.fi<<", "<<p.se<<"}";}

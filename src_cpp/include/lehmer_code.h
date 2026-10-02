@@ -1,4 +1,4 @@
 #pragma once
 #include "cube.h"
-#include <bits/stdc++.h>
+#include <vector>
 int lehmer_code(vector<int>& perm);

@@ -1,3 +1,5 @@
+#include <fstream>
+#include <iostream>
 #include "cube.h"
 #include "eoh.h"
 eoh::eoh()

@@ -2,6 +2,8 @@
  *  @brief Implementation of the cube class.
  *  @details Contains methods for manipulating the cube state (rotations).
  */
+#include <numeric>
+#include <functional>
 #include <iostream>
 #include <vector>
 #include "cube.h"
