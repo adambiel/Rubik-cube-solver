@@ -57,7 +57,7 @@ g++ -Isrc_cpp/include src_cpp/gen_test_case.cpp src_cpp/cube.o -o gen_test_case
 After running the `setup.sh` script, you can automatically test the solver's performance on random (but valid) cube states using the following command:
 
 ```bash
-./src_cpp/main --test
+python3 main.py --test
 ```
 
 ## 6. Documentation
